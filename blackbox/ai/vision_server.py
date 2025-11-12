@@ -968,18 +968,19 @@ def main():
                         img_top    = images_record[0] if len(images_record) > pos[0] else None
                         img_bottom = images_record[3] if len(images_record) > pos[1] else None
 
-                        # Dashboard for display
-                        dashboard_display = compose_dashboard_800x450_two_imgs_left_bev_right(img_top, img_bottom, bev_480)
 
                         H, W = bev_480.shape[:2]
                         txt1 = f"tires {payload['tires'][0]:.1f}, {payload['tires'][1]:.1f}, {payload['tires'][2]:.1f}, {payload['tires'][3]:.1f} event : {payload['value']}"
                         txt2 = f"speed : {payload['speed']:.1f} km/h brake :{payload_draw['brake_state']}%  throttle : {payload_draw['throttle']} % rpm : {payload_draw['rpm']}"
 
                         # Display Dashboard에 텍스트 그리기
-                        cv2.putText(dashboard_display, txt1, (20, H - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2, cv2.LINE_AA)
-                        cv2.putText(dashboard_display, txt1, (20, H - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
-                        cv2.putText(dashboard_display, txt2, (20, H - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2, cv2.LINE_AA)
-                        cv2.putText(dashboard_display, txt2, (20, H - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                        cv2.putText(bev_480, txt1, (20, H - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2, cv2.LINE_AA)
+                        cv2.putText(bev_480, txt1, (20, H - 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                        cv2.putText(bev_480, txt2, (20, H - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 2, cv2.LINE_AA)
+                        cv2.putText(bev_480, txt2, (20, H - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                        
+                        # Dashboard for display
+                        dashboard_display = compose_dashboard_800x450_two_imgs_left_bev_right(img_top, img_bottom, bev_480)
                         
                         cv2.imshow(WIN, dashboard_display)
 
