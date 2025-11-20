@@ -2,9 +2,15 @@
 #define HARDWARE_H
 #include <stddef.h>
 #include <time.h>
+#include <math.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 // ================= 1. 공통 및 초기화 API =================
 
 // --- CAN 통신 관련 변수 ---
@@ -74,6 +80,26 @@ extern "C" {
 
 //AI 요청 프레임 속도
 #define FPS_TARGET                  5.0
+
+// 충돌 예측 값들
+    //핸들 각도
+//#define STEERING_RATIO              15.0
+    //차량 앞바퀴 축과 뒷바퀴 축 사이의 거리
+#define VEHICLE_WHEELBASE           2.7
+    //차량의 전체 길이
+#define VEHICLE_LENGTH              4.5
+    //차량 전체의 폭
+#define VEHICLE_WIDTH               2.2
+
+//파이썬에게 보낼 좌표들 설정
+    //파이썬에게 보낼 미래 좌표 수
+#define POS_COUNT                   10
+    //예측 시간(초)
+#define PREDICTION_DT               0.5
+
+//#define MAX_STEER_WHEEL_DEG         450.0   // [추가] 핸들 최대 회전각 (보통 450~540도)
+
+
 
 typedef struct {
     double v_kph[SPEED_BUF];
